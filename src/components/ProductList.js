@@ -3,6 +3,8 @@ import { styled } from "@mui/material/styles";
 import { Box, Grid, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Alert from '@mui/material/Alert';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -13,12 +15,23 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function ProductList() {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
+
+  const handleClick = (id) => {
+    if (cart.includes(id)) {
+      alert("Sản phẩm đã được thêm!");
+      console.log(cart)
+    } else {
+      setCart([...cart, id]);
+      alert("Sản phẩm đã thêm!!!!!");
+    }
+  };
 
   return (
     <div>
@@ -48,7 +61,29 @@ export default function ProductList() {
                   overflow: "hidden",     
                 }}>{p.title}
               </p>
-              <Link to={`/product/${p.id}`}>Xem chi tiết</Link>
+              <div  style={{
+                display:"flex",
+                alignItems: "center",
+                fontSize: "2px"
+                }}    
+              >
+              <AddCircleIcon
+                onClick={()=>handleClick(p.id)}
+                color="primary"
+                fontSize="large"
+                style={{ cursor: "pointer" }}
+              />               
+              <Link
+                style={{
+                textDecoration: "none",
+                color:"white",
+                background:"#1b98e0",
+                padding:"5px",
+                borderRadius:"7px",
+                fontSize: "14px"
+                }}    
+                to={`/product/${p.id}`}>Xem chi tiết</Link>
+              </div>
             </Item>
           </Grid>
         ))}

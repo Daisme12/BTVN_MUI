@@ -15,7 +15,18 @@ export default function ProductDetail() {
     if (!product) return <p>Đang tải...</p>;
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{ 
+            display:"flex",
+            alignItems:"center",
+            width:"500px",
+            padding: "20px",
+            flexDirection: "column",
+            margin: "auto",
+            background:"#1b98e0",
+            borderRadius:"10px",
+            color:"white",
+            padding:"20px"
+            }}>
             <h2>{product.title}</h2>
             <img src={product.image} alt={product.title} width="200" />
             <p><b>Giá:</b> ${product.price}</p>
@@ -23,12 +34,12 @@ export default function ProductDetail() {
             <p><b>Danh mục:</b> {product.category}</p>
             <Link
                 style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "10px 20px",
-                    backgroundColor: "#000000",
-                    outline: "none"
+                textDecoration: "none",
+                color:"#1b98e0",
+                background:"white",
+                padding:"15px",
+                borderRadius:"7px",
+                fontSize: "15px"
                 }}
                 to={`/home`}>Về trang chủ</Link>
         </div>
